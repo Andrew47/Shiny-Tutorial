@@ -12,24 +12,23 @@ library(mapproj)
 
 
 shinyServer(function(input, output) {
+  
   output$text1 <- renderText({
     paste("You have selected", input$var)
   })
   
   output$map <- renderPlot({
-    data <- switch(input$var,
-                   "% White" = counties$white,
-                   "% Black" = counties$black,
-                   "% Hispanic" = counties$hispanic,
-                   "% Asian" = counties$asian)
+    args <- switch(input$var,
+                   "% White" = list(counties$white, "darkblue"),
+                   "% Black" = list(counties$black, "black"),
+                   "% Hispanic" = list(counties$hispanic, "darkorange"),
+                   "% Asian" = list(counties$asian, "darkgreen"))
+                   
+                  args$min <- input$range[1]
+                  args$max <- input$range[2]
+                  args$legend.title <- "US Census Data"
     
-    percent_map(
-      var = data, 
-      color = "skyblue", 
-      legend.title = "Census Data", 
-      max = input$range[2], 
-      min = input$range[1])
-  })
+                  do.call(percent_map, args)
+    
 })
-
-?switch
+})
