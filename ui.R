@@ -21,7 +21,7 @@ shinyUI(fluidPage(
                   min = 0,
                   max = 100,
                   value = c(0,100))),
-    mainPanel("Text Reaction:",
+    mainPanel("Selection:",
               textOutput("text1"),
               plotOutput("map"))
   )

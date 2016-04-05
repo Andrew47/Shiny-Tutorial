@@ -1,4 +1,4 @@
-#Following packages were installed:
+#Following packages need to be installed:
 
 #install.packages("shiny")
 #install.packages(c("maps","mapproj"))
